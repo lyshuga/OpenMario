@@ -27,6 +27,7 @@ namespace OpenMario.Core.Environment
         public bool isBoxActivated = false;
         private long framesFromStart = 0;
         private long lastFrameLavaPoped = 0;
+        public QuestionBox ActiveBox;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Environment"/> class.
@@ -146,7 +147,7 @@ namespace OpenMario.Core.Environment
 
             if (this.isBoxActivated)
             {
-                var coin = new Coin { Position = new Vector2D_Dbl(300, 260) };
+                var coin = new Coin { Position = new Vector2D_Dbl(ActiveBox.Position.X, ActiveBox.Position.Y - 40) };
                 coin.Load(this);
                 this.Actors.Add(coin);
 

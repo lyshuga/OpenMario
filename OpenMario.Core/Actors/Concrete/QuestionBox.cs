@@ -25,6 +25,7 @@ namespace OpenMario.Core.Actors.Concrete
         private bool isActivated = false;
         private bool previouslyActivated = false;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="QuestionBox"/> class.
         /// </summary>
@@ -63,7 +64,7 @@ namespace OpenMario.Core.Actors.Concrete
             if (!this.previouslyActivated)
             {
                 this.Environment.isBoxActivated = true;
-                
+                this.Environment.ActiveBox = this;
             }
         }
     }
