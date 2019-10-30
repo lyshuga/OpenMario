@@ -146,7 +146,7 @@ namespace OpenMario.Core.Environment
 
             if (this.isBoxActivated)
             {
-                var coin = new Coin { Position = new Vector2D_Dbl(300, 260) };
+                var coin = new Coin { Position = new Vector2D_Dbl(ActiveBox.Position.X, ActiveBox.Position.Y - 40) };
                 coin.Load(this);
                 this.Actors.Add(coin);
 
