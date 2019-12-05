@@ -1,10 +1,3 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="Environment.cs" company="brpeanut">
-//     Copyright (c), brpeanut. All rights reserved.
-// </copyright>
-// <summary> Where the base environment is created. </summary>
-// <author> brpeanut/OpenMario - https://github.com/brpeanut/OpenMario </author>
-//-----------------------------------------------------------------------
 
 namespace OpenMario.Core.Environment
 {
