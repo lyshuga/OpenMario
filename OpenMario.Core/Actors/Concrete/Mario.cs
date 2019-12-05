@@ -91,7 +91,7 @@ namespace OpenMario.Core.Actors.Concrete
             Physics.Physics.NormalizeVelocity(this);
 
             // Block all Collisions with 'Block' set.
-            //Physics.Physics.BlockAllCollisions(this, loadedactors);
+            Physics.Physics.BlockAllCollisions(this, loadedactors);
         }
 
         /// <summary>

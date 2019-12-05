@@ -27,6 +27,7 @@ namespace OpenMario.Core.Environment
         public bool isBoxActivated = false;
         private long framesFromStart = 0;
         private long lastFrameLavaPoped = 0;
+        public QuestionBox ActiveBox;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Environment"/> class.
