@@ -17,7 +17,7 @@
         {
             env.MusicAsset = @"Assets\overworldtheme.mp3";
 
-            // Controls
+
             env.Players.Add(new PlayerOne());
 
             // Backgrounds
