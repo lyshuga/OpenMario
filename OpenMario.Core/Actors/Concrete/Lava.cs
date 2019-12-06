@@ -42,7 +42,8 @@
             /* collision options */
             foreach (BaseActor actor in loadedactors)
             {
-                if (actor is Mario && Physics.Physics.GetCollisionType(actor, this) != Physics.Physics.CollisionType.None)
+                if ((actor is Mario || actor is Goomba) &&
+                    Physics.Physics.GetCollisionType(actor, this) != Physics.Physics.CollisionType.None)
                 {
                     Environment.ActorsToRemove.Add(actor);
                 }
