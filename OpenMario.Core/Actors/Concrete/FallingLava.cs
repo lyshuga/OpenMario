@@ -42,7 +42,7 @@
             {
                 if (Physics.Physics.GetCollisionType(actor, this) != Physics.Physics.CollisionType.None)
                 {
-                    if (actor is Mario)
+                    if (actor is Mario || actor is Goomba)
                     {
                         Environment.ActorsToRemove.Add(actor);
                     }
