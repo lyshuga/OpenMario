@@ -13,6 +13,7 @@ namespace OpenMario.Core.Actors.Concrete
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using VectorClass;
 
     /// <summary>
     /// Class for the <see cref="Goomba"/> actor.
@@ -85,20 +86,30 @@ namespace OpenMario.Core.Actors.Concrete
             // Gravity.
             base.Update(loadedactors);
 
+            this.Position += this.WalkingVelocity;
 
+            // Jump over the obstacle
+            if (Physics.Physics.IsActorPushingAnotherFromLeft(this, loadedactors)
+                || Physics.Physics.IsActorPushingAnotherFromRight(this, loadedactors))
+            {
+                //this.Velocity = new VectorClass.Vector2D_Dbl(this.WalkingVelocity.X * -1, Velocity.Y);
+                //this.Velocity = new Vector2D_Dbl(this.Velocity.X, Physics.Physics.MaxJumpSpeed);
 
-            // If bump into Left or Right, Turn around.
-            //if (Physics.Physics.IsActorPushingAnotherFromLeft(this, loadedactors)
-            //    || Physics.Physics.IsActorPushingAnotherFromRight(this, loadedactors))
-            //{
-            //    this.Velocity = new VectorClass.Vector2D_Dbl(this.WalkingVelocity.X * -1, Velocity.Y);
-            //    this.WalkingVelocity = new VectorClass.Vector2D_Dbl(this.WalkingVelocity.X * -1, this.WalkingVelocity.Y);
-            //}
+                //this.Velocity = new VectorClass.Vector2D_Dbl(this.WalkingVelocity.X * -1, Velocity.Y);
+                //this.WalkingVelocity = new VectorClass.Vector2D_Dbl(this.WalkingVelocity.X * -1, this.WalkingVelocity.Y);
 
+                //this.Velocity -= new VectorClass.Vector2D_Dbl(0, Physics.Physics.MaxJumpSpeed);
+                //this.WalkingVelocity -= new VectorClass.Vector2D_Dbl(0, Physics.Physics.MaxJumpSpeed);
+
+                this.Position -= new VectorClass.Vector2D_Dbl(0, Physics.Physics.MaxJumpSpeed);
+            }
+
+            // Walk
+            
             int direction = master.Position.X < this.Position.X ? -1 : 1;
             this.WalkingVelocity = new VectorClass.Vector2D_Dbl(direction, this.WalkingVelocity.Y);
-            // Walk
-            this.Position += this.WalkingVelocity;
+            
+           
 
 
             /* collision options */

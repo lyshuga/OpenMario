@@ -40,7 +40,7 @@ namespace OpenMario.Environments.OnePlayerEnvironments
             Actors.Add(new QuestionBox { Position = new Vector2D_Dbl(300, 300) });
             Actors.Add(new Goomba(mario) { Position = new Vector2D_Dbl(420, 100) });
             Actors.Add(new Coin { Position = new Vector2D_Dbl(450, 250) });
-            Actors.Add(new GreenStaticPipe { Position = new Vector2D_Dbl(380, 340) });
+            Actors.Add(new GreenStaticPipe { Position = new Vector2D_Dbl(200, 340) });
             Actors.Add(new Coin { Position = new Vector2D_Dbl(380, 300) });
             Actors.Add(new GreenStaticPipe { Position = new Vector2D_Dbl(520, 340) });
             Actors.Add(new Coin { Position = new Vector2D_Dbl(520, 300) });
