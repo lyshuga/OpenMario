@@ -8,7 +8,7 @@ namespace OpenMario.Core.Actors.Concrete
     /// <summary>
     /// The question box.
     /// </summary>
-    public class QuestionBox : StaticBox
+    public class Teleport : StaticBox
     {
         /// <summary>
         /// The drawable object.
@@ -17,15 +17,16 @@ namespace OpenMario.Core.Actors.Concrete
         private Bitmap drawable;
         private bool isActivated = false;
         private bool previouslyActivated = false;
-
+        public Environment.Environment env;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QuestionBox"/> class.
         /// </summary>
-        public QuestionBox()
+        public Teleport(Environment.Environment env)
         {
-            this.Width = 30;
-            this.Height = 30;
+            this.Width = 40;
+            this.Height = 40;
+            this.env = env;
         }
 
         /// <summary>
@@ -51,14 +52,6 @@ namespace OpenMario.Core.Actors.Concrete
         {
             var pos = Environment.CalculateRelativePosition(this);
             g.DrawImage(this.drawable, (int)pos.X, (int)pos.Y);
-        }
-        public void ActivateBox()
-        {
-            if (!this.previouslyActivated)
-            {
-                this.Environment.isBoxActivated = true;
-                this.Environment.ActiveBox = this;
-            }
         }
     }
 }

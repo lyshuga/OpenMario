@@ -21,6 +21,8 @@ namespace OpenMario.Core.Environment
         private long framesFromStart = 0;
         private long lastFrameLavaPoped = 0;
         public QuestionBox ActiveBox;
+        public bool isNewLevel;
+        public Form f;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Environment"/> class.
@@ -37,6 +39,7 @@ namespace OpenMario.Core.Environment
             this.ViewportPosition = new Vector2D_Dbl(0, 0);
             this.ViewportVelocity = new Vector2D_Dbl(0, 0);
             this.IsRunning = true;
+            this.isNewLevel = false;
         }
 
         /// <summary>
@@ -115,6 +118,7 @@ namespace OpenMario.Core.Environment
         /// </param>
         public void RegisterAllKeys(Form f)
         {
+            this.f = f;
             foreach (var p in this.Players)
             {
                 p.RegisterKeyMappings(f);
@@ -131,6 +135,19 @@ namespace OpenMario.Core.Environment
             if (!this.IsRunning)
             {
                 return;
+            }
+
+            if (this.isNewLevel)
+            {
+                this.Actors = new List<BaseActor>();
+                this.Players = new List<BasePlayer>();
+                InsertObjects();
+                Load();
+                this.isNewLevel = false;
+                foreach (var p in this.Players)
+                {
+                    p.RegisterKeyMappings(this.f);
+                }
             }
 
             foreach (var a in this.Actors)
@@ -195,6 +212,7 @@ namespace OpenMario.Core.Environment
             {
                 this.IsRunning = false;
             }
+
         }
 
         /// <summary>
@@ -244,6 +262,39 @@ namespace OpenMario.Core.Environment
 
             this.MusicPlayer = new WindowsMediaPlayer { URL = this.MusicAsset };
             this.MusicPlayer.controls.play();
+        }
+
+        public void InsertObjects()
+        {
+            this.MusicAsset = @"Assets\overworldtheme.mp3";
+
+
+            this.Players.Add(new PlayerOne());
+
+            // Backgrounds
+            this.Actors.Add(new Cloud());
+
+            // Actors
+            this.Actors.Add(new OrangeLand { Position = new Vector2D_Dbl(0, 400), Width = 1500, Height = 50 });
+            this.Actors.Add(new QuestionBox { Position = new Vector2D_Dbl(300, 300) });
+            this.Actors.Add(new QuestionBox { Position = new Vector2D_Dbl(520, 300) });
+            this.Actors.Add(new QuestionBox { Position = new Vector2D_Dbl(780, 300) });
+            //env.Actors.Add(new Goomba { Position = new Vector2D_Dbl(200, 100), WalkingVelocity = new Vector2D_Dbl(1, 0) });
+            //env.Actors.Add(new Goomba { Position = new Vector2D_Dbl(800, 100), WalkingVelocity = new Vector2D_Dbl(1, 0) });
+            this.Actors.Add(new GreenStaticPipe { Position = new Vector2D_Dbl(380, 340) });
+            this.Actors.Add(new GreenStaticPipe { Position = new Vector2D_Dbl(660, 340) });
+            this.Actors.Add(new GreenStaticPipe { Position = new Vector2D_Dbl(900, 340) });
+            this.Actors.Add(new Coin { Position = new Vector2D_Dbl(380, 300) });
+            this.Actors.Add(new Coin { Position = new Vector2D_Dbl(450, 250) });
+            this.Actors.Add(new Coin { Position = new Vector2D_Dbl(520, 200) });
+            this.Actors.Add(new Coin { Position = new Vector2D_Dbl(780, 250) });
+            this.Actors.Add(new Coin { Position = new Vector2D_Dbl(1000, 300) });
+            this.Actors.Add(new Lava { Position = new Vector2D_Dbl(420, 380), Width = 240, Height = 20 });
+
+            // Players
+            this.Actors.Add(new Mario(this.Players[0]));
+
+            this.Width = 1500;
         }
 
         /// <summary>

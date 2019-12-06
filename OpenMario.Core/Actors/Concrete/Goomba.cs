@@ -8,6 +8,7 @@
 
 namespace OpenMario.Core.Actors.Concrete
 {
+    using OpenMario.Core.Players;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -30,14 +31,16 @@ namespace OpenMario.Core.Actors.Concrete
         /// Used to swap the drawables for the Goomba.
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        private Stopwatch timer;
+        private Mario master;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Goomba"/> class.
         /// </summary>
-        public Goomba() 
+        public Goomba(Mario master) 
         {
-            this.WalkingVelocity = new VectorClass.Vector2D_Dbl(-1, 0);
+            this.master = master;
+            int direction = master.Position.X < this.Position.X ? 1 : -1;
+            this.WalkingVelocity = new VectorClass.Vector2D_Dbl(direction, 0);
             this.Width = 30;
             this.Height = 30;
         }
@@ -71,8 +74,8 @@ namespace OpenMario.Core.Actors.Concrete
                     B.SetPixel(j, i, Color.Red);
             this.drawableCurrent = B;
 
-            this.timer = new Stopwatch();
-            this.timer.Start();
+            //this.timer = new Stopwatch();
+            //this.timer.Start();
         }
 
         /// <summary>
@@ -87,11 +90,11 @@ namespace OpenMario.Core.Actors.Concrete
             base.Update(loadedactors);
 
             // Drawable
-            if (this.timer.ElapsedMilliseconds > 500)
-            {
-                this.timer.Reset();
-                this.timer.Start();
-            }
+            //if (this.timer.ElapsedMilliseconds > 500)
+            //{
+            //    this.timer.Reset();
+            //    this.timer.Start();
+            //}
 
             // Walk
             this.Position += this.WalkingVelocity;

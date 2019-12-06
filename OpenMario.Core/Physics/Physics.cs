@@ -328,6 +328,11 @@ namespace OpenMario.Core.Physics
                     // OnLeftSide
                     a.Position = new Vector2D_Dbl(c.Position.X - a.Width, a.Position.Y);
                     a.Velocity = new Vector2D_Dbl(0, a.Velocity.Y);
+                    if (a.GetType() == typeof(Mario) && c.GetType() == typeof(Teleport))
+                    {
+                        var kok = (Teleport)c;
+                        kok.env.isNewLevel = true;
+                    }
                 }
                 else if (IsActorPushingAnotherFromRight(a, c))
                 {
